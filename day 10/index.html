@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 10</title>
+    <style>
+        html {
+            font-family: sans-serif;
+            background: #ffc600;
+        }
+
+        .inbox {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.01);
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .item:last-child{
+            border-bottom: 0;
+        }
+
+        input:checked + p {
+            background: #f9f9f9;
+            text-decoration: line-through;
+        }
+
+        input[type="checkbox"] {
+            margin: 20px;
+        }
+
+        p {
+            margin : 0;
+            padding: 20px;
+            flex: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="inbox">
+        <div class="item">
+            <input type="checkbox">
+            <p>this is a inbox layout.</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>currently I write a code</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Tomorrow I played cricket with my friend.</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>I learned git & github.</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>I love my family.</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>I want to sing a song.</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>I like to play free fire game with my friend</p>
+        </div>
+        <div class="item">
+            <input type="checkbox">
+            <p>Today classes is totaly based in dev.</p>
+        </div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+        let lastchecked;
+
+        function handleCheck(e) {
+
+            let inBetween = false;
+
+            if(e.shiftKey && this.checked) {
+
+                checkboxes.forEach(checkbox => {
+
+                    console.log(checkbox);
+
+                        if(checkbox === this || checkbox === lastchecked) {
+                            inBetween = !inBetween;
+                            console.log('Starting to check them inbetween');
+                        }
+
+                        if(inBetween) {
+                            checkbox.checked = true;
+                        }
+                });
+            }
+            
+            lastchecked = this;
+        }
+
+        checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+    </script>
+
+</body>
+</html>
