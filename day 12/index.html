@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Detection day 12</title>
+    <script type="text/javascript" src = "http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+    <script>
+        const pressed = [];
+        const secretcode = 'hii';  
+        window.addEventListener('keyup',(e) => {
+            console.log(e.key);
+            pressed.push(e.key);
+            pressed.splice(-secretcode.length - 1 , pressed.length - secretcode.length);
+                if(pressed.join('').includes(secretcode)){
+                    console.log("Yo Yo bro");
+                    cornify_add();
+                }
+        console.log(pressed);
+        });
+        
+    </script>
+</body>
+</html>
