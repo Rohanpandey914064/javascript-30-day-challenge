@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 13</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .site-wrap {
+            max-width: 700px;
+            margin: 100px auto;
+            text-align: justify;
+        }
+
+        .align-left {
+            float:left;
+            margin-right: 20px;
+        }
+
+        .align-right {
+        float: right;
+        margin-left: 20px;
+        }
+
+        .slide-in {
+        opacity: 0;
+        transition: all 0.5s;
+        }
+
+        .align-left.slide-in {
+        transform: translateX(-30%) scale(0.95);
+        }
+
+        .align-right.slide-in {
+        transform: translateX(30%) scale(0.95);
+        }
+
+        .slide-in.active {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="site-wrap">
+    <h1>Slide in on Scroll</h1>
+
+    <p>Scroll down 👇</p>
+
+    <img src="https://picsum.photos/400/300?1" class="align-left slide-in">
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo corrupti iure omnis dignissimos facere corporis iusto obcaecati incidunt ipsam, autem inventore libero repellendus eveniet cumque quibusdam placeat, magnam, voluptatem suscipit officia. Doloremque eum sequi dolorum nesciunt consequatur, ad architecto saepe, maxime repudiandae, necessitatibus fuga ex! Labore recusandae perspiciatis ducimus sint vel nostrum explicabo, aut commodi odio porro voluptatum, vitae et, impedit quisquam. Et doloremque reiciendis nemo reprehenderit repellat fugiat facere! Inventore itaque dolore, fugit fugiat rerum, aliquam quae maiores quibusdam placeat asperiores veniam sed ad! Aut voluptatum eum laborum repudiandae! Ipsum ipsam repellendus fuga amet. Possimus dicta minima optio iure! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, aliquid. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Mollitia distinctio aspernatur cumque officiis, maiores laboriosam. Ipsa, vitae dolores quos id error amet temporibus nam iste commodi asperiores impedit aliquid nihil.</p>
+
+    <img src="https://picsum.photos/400/300?2" class="align-right slide-in">
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus similique incidunt, corporis vero commodi unde quaerat quam, dolore dicta illo minima tempora ullam deserunt placeat beatae, recusandae a accusamus dignissimos corrupti necessitatibus voluptas nobis fugiat. Cumque quos repudiandae, fugiat quaerat sed asperiores. Eaque, impedit explicabo est commodi exercitationem qui suscipit cumque tempore fugiat soluta error cum saepe deserunt consequuntur quas ipsum maxime, autem id, aut voluptate iusto? Similique, molestias quasi animi corrupti ut accusantium dolorum alias ullam ab! Fugit amet pariatur, numquam qui omnis libero consectetur est quasi itaque unde voluptas, fugiat corrupti commodi iusto debitis sunt quos, eaque enim? Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias pariatur eum deserunt dicta necessitatibus autem? Corrupti vel eveniet unde, aliquid, fugiat voluptatibus amet, numquam itaque facere excepturi ex praesentium debitis.</p>
+
+    <img src="https://picsum.photos/400/300?3" class="align-left slide-in">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione culpa quae aut blanditiis facere architecto quidem nam dolore porro possimus ex impedit maxime explicabo tenetur, reprehenderit, ea rerum dolor. Autem perspiciatis sit ipsum odit quidem laudantium, ut provident, commodi ad nemo neque magni, molestias eligendi accusamus. Nam nisi voluptatum officia necessitatibus alias sunt, rerum illo quaerat a dolorum cumque vero est quisquam aspernatur quis eaque soluta odio quos dolores impedit quod voluptatibus aperiam voluptate? Error quas sed assumenda similique rerum maxime consectetur dicta? A beatae, veniam temporibus doloremque ratione similique voluptatem fuga ipsum soluta officia, pariatur dolorum quae impedit. In.Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis debitis at, odit id, cupiditate qui minus suscipit nulla fugiat ad architecto dolore minima, dicta ullam! Iusto fugiat quisquam earum necessitatibus.</p>
+  </div>
+
+  <script>
+
+    function debounce(func, wait = 20, immediate = true) {
+        let timeout;
+            return function () {
+                const context = this, args = arguments;
+                const later = function () {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                    const callNow = immediate && !timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                    if (callNow) func.apply(context, args);
+            };
+        }
+
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    function checkslide(e) {
+        sliderImages.forEach(sliderImage => {
+            const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+            const imageBottom = sliderImage.offsetTop + sliderImage.height;
+            const isHalfShow = slideInAt > sliderImage.offsetTop;
+            const isnotscrolledpast = window.scrollY < imageBottom;
+            if(isHalfShow && isnotscrolledpast) {
+                sliderImage.classList.add('active');
+            }else {
+                sliderImage.classList.remove('active');
+            }
+        })
+    }
+
+    window.addEventListener("scroll",debounce(checkslide));
+  </script>
+</body>
+</html>
